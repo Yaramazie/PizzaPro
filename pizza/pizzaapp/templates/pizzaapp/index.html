@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    {% for pizza in pizzas %}
+<div class="card" style="width: 18rem;">
+
+  <img src="{{ pizza.photo.url }}" class="card-img-top" width="150" , height="120" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ pizza.title }}</h5>
+    <p class="card-text">{{ pizza.title }}</p>
+    <a href="#" class="btn btn-primary">Add to bin</a>
+
+  </div>
+</div>
+      {% endfor %}
+</div>
+
+{% endblock %}
