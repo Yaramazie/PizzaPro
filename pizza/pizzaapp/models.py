@@ -27,7 +27,9 @@ class Pizza(models.Model):
     category = models.ForeignKey(Categories, on_delete=models.PROTECT, verbose_name='Category')
     size = models.ForeignKey(Sizes, on_delete=models.PROTECT, verbose_name='Size', null=True, blank=True)
     dough = models.ForeignKey(Dough, on_delete=models.PROTECT, verbose_name='Dough')
-    price = models.IntegerField(default=0, verbose_name='Price')
+    price_22sm = models.IntegerField(default=0, verbose_name='Price_22sm')
+    price_26sm = models.IntegerField(default=0, verbose_name='Price_26sm')
+    price_32sm = models.IntegerField(default=0, verbose_name='Price_32sm')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Photo', blank=True)
 
     def __str__(self):
