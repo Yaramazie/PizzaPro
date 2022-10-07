@@ -1,7 +1,17 @@
 from django.contrib import admin
+from django import forms
 from django.utils.safestring import mark_safe
+from ckeditor.widgets import CKEditorWidget
 
 from .models import *
+
+
+class PizzaAdminForm(forms.ModelForm):
+    title = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = Pizza
+        fields = '__all__'
 
 
 class CategoriesAdmin(admin.ModelAdmin):
@@ -17,6 +27,7 @@ class DoughAdmin(admin.ModelAdmin):
 
 
 class PizzaAdmin(admin.ModelAdmin):
+    form = PizzaAdminForm
     list_display = ['title', 'category', 'size', 'dough', 'price_22sm', 'price_26sm', 'price_32sm', 'get_photo']
     list_display_links = ['title', 'category', 'size', 'dough', 'price_22sm', 'price_26sm', 'price_32sm']
     search_fields = ('title', 'category', 'size', 'dough')
@@ -26,6 +37,7 @@ class PizzaAdmin(admin.ModelAdmin):
             return mark_safe(f'<img src="{obj.photo.url}" width="50">')
         else:
             return '-'
+
     get_photo.short_description = 'Photo'
 
 
