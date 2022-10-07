@@ -3,17 +3,24 @@
 {% block content %}
 
 <div class="container">
+    <ul class="list-group">
+    <br>
     {% for pizza in pizzas %}
-<div class="card" style="width: 18rem;">
+<div class="card mb-9">
 
-  <img src="{{ pizza.photo.url }}" class="card-img-top" width="150" , height="120" alt="...">
+  <img src="{{ pizza.photo.url }}" class="card-img-top"    alt="..." class="mr-3">
   <div class="card-body">
     <h5 class="card-title">{{ pizza.title }}</h5>
     <p class="card-text">{{ pizza.title }}</p>
+      <p class="card-text">{{ pizza.price_22sm}}$</p>
+      <p class="card-text">{{ pizza.price_26sm }}$</p>
+      <p class="card-text">{{ pizza.price_32sm }}$</p>
     <a href="#" class="btn btn-primary">Add to bin</a>
 
   </div>
 </div>
+    <br>
+    </ul>
       {% endfor %}
 </div>
 
