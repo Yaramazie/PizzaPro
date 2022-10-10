@@ -5,23 +5,25 @@
 <div class="container">
     <ul class="list-group">
     <br>
-    {% for pizza in pizzas %}
-<div class="card mb-9">
+    {% for pizza in pizza_list %}
 
-  <img src="{{ pizza.photo.url }}" class="card-img-top"    alt="..." class="mr-3">
+
+  <img src="{{ pizza.photo.url }}"  width="400"   alt="..." class="mr-3">
   <div class="card-body">
     <h5 class="card-title">{{ pizza.title }}</h5>
     <p class="card-text">{{ pizza.title }}</p>
       <p class="card-text">{{ pizza.price_22sm}}$</p>
       <p class="card-text">{{ pizza.price_26sm }}$</p>
       <p class="card-text">{{ pizza.price_32sm }}$</p>
-    <a href="#" class="btn btn-primary">Add to bin</a>
+      <a href="{{pizza.get_absolute_url}}" class="btn btn-primary">Click me for info!</a>
 
   </div>
-</div>
+
     <br>
     </ul>
       {% endfor %}
 </div>
 
 {% endblock %}
+
+

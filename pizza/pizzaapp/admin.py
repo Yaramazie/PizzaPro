@@ -6,31 +6,23 @@ from ckeditor.widgets import CKEditorWidget
 from .models import *
 
 
-class PizzaAdminForm(forms.ModelForm):
-    title = forms.CharField(widget=CKEditorWidget())
-
-    class Meta:
-        model = Pizza
-        fields = '__all__'
-
-
 class CategoriesAdmin(admin.ModelAdmin):
     list_display = ['title']
+    prepopulated_fields = {'slug': ('title',)}
 
 
-class SizesAdmin(admin.ModelAdmin):
-    list_display = ['title']
 
 
 class DoughAdmin(admin.ModelAdmin):
     list_display = ['title']
+    prepopulated_fields = {'slug': ('title',)}
 
 
 class PizzaAdmin(admin.ModelAdmin):
-    form = PizzaAdminForm
-    list_display = ['title', 'category', 'size', 'dough', 'price_22sm', 'price_26sm', 'price_32sm', 'get_photo']
-    list_display_links = ['title', 'category', 'size', 'dough', 'price_22sm', 'price_26sm', 'price_32sm']
-    search_fields = ('title', 'category', 'size', 'dough')
+    prepopulated_fields = {'slug': ('title',)}
+    list_display = ['title', 'category', 'price_22sm', 'price_26sm', 'price_32sm', 'get_photo', 'slug']
+    list_display_links = ['title', 'category', 'price_22sm', 'price_26sm', 'price_32sm']
+    search_fields = ('title', 'category')
 
     def get_photo(self, obj):
         if obj.photo:
@@ -42,6 +34,5 @@ class PizzaAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Categories, CategoriesAdmin)
-admin.site.register(Sizes, SizesAdmin)
 admin.site.register(Dough, DoughAdmin)
 admin.site.register(Pizza, PizzaAdmin)

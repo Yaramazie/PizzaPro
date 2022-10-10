@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <class class="mb-3">
+        <div class="card-header">
+            <h3>Category: <a href="{{ pizza.category.get_absolute_url }}">{{ pizza.category }}</a></h3>
+            <div class="card-body">
+                <img src="{{ pizza.photo.url }}" width="650" alt="">
+                <h2>{{ pizza.title }}</h2>
+                <h4>{{ pizza.dough }}</h4>
+                <h4>{{ pizza.size }}</h4>
+                <h4>22 sm - {{ pizza.price_22sm }}$
+                    <button type="button" class="btn btn-outline-primary">Add to bin</button>
+                </h4>
+                <h4>26 sm - {{ pizza.price_26sm }}$
+                    <button type="button" class="btn btn-outline-primary">Add to bin</button>
+                </h4>
+                <h4>32 sm - {{ pizza.price_32sm }}$
+                    <button type="button" class="btn btn-outline-primary">Add to bin</button>
+                </h4>
+
+
+            </div>
+        </div>
+    </class>
+
+</div>
+
+{% endblock %}

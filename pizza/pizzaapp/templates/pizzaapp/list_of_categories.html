@@ -1,0 +1,8 @@
+{% load pizzaapp_tags %}
+<div class="list-group">
+    {% for category in categories %}
+    <a href="{{category.get_absolute_url}}" class="list-group-item list-group-item-action">{{category.title}}
+        <span class="badge rounded-pill text-bg-light">{{item.cnt}}</span></a>
+
+    {% endfor %}
+</div>

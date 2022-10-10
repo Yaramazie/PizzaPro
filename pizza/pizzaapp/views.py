@@ -1,5 +1,6 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, DetailView
 
 from .forms import UserRegisterForm, UserLoginForm
 from django.contrib.auth import login, logout
@@ -7,12 +8,24 @@ from .models import *
 from django.contrib import messages
 
 
-def index(request):
-    pizzas = Pizza.objects.all()
-    context = {
-        'pizzas': pizzas
-    }
-    return render(request, 'pizzaapp/index.html', context=context)
+class AllPizzas(ListView):
+    model = Pizza
+    template_name = 'pizzaapp/index.html'
+    context_object_name = 'pizza_list'
+
+
+class ByCategory(ListView):
+    model = Pizza
+    template_name = 'pizzaapp/index.html'
+    context_object_name = 'pizza_list'
+    allow_empty = True
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ByCategory, self).get_context_data(**kwargs)
+        return context
+
+    def get_queryset(self):
+        return Pizza.objects.filter(category__slug=self.kwargs['slug'])
 
 
 def user_login(request):
@@ -47,3 +60,7 @@ def register(request):
     return render(request, 'pizzaapp/register.html', {'form': form})
 
 
+class PizzaDetail(DetailView):
+    model = Pizza
+    template_name = 'pizzaapp/get_pizza.html'
+    context_object_name = 'pizza'
